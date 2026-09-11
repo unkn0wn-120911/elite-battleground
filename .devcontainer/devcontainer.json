@@ -1,1 +1,22 @@
-
+{
+  "name": "Elite Battleground - Godot Dev",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "forwardPorts": [8080, 5901],
+  "portsAttributes": {
+    "8080": {
+      "label": "️ VNC Desktop",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "geequlim.godot-tools"
+      ]
+    }
+  },
+  "postStartCommand": "/home/vscode/start-vnc.sh",
+  "remoteUser": "vscode"
+}
