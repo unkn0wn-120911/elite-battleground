@@ -3,15 +3,11 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "forwardPorts": [5900, 6080],
+  "forwardPorts": [5900],
   "portsAttributes": {
     "5900": {
       "label": "VNC Desktop",
       "onAutoForward": "notify"
-    },
-    "6080": {
-      "label": "noVNC Browser (fallback)",
-      "onAutoForward": "silent"
     }
   },
   "customizations": {
@@ -21,7 +17,5 @@
       ]
     }
   },
-  "postStartCommand": "bash ${containerWorkspaceFolder}/start-vnc.sh",
-  "postAttachCommand": "bash ${containerWorkspaceFolder}/start-vnc.sh",
   "remoteUser": "vscode"
 }
