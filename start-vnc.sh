@@ -37,7 +37,7 @@ echo ""
 echo "VNC is running."
 echo "  Password: $VNC_PASS"
 echo "  Direct VNC: localhost:5900"
-echo "  Browser: http://localhost:6080/vnc.html"
+echo "  Browser fallback: http://localhost:6080/vnc.html (may hang in Codespaces; prefer direct VNC on port 5900)"
 
 # Keep the script alive so the VNC session stays attached to the Codespace lifecycle.
 wait

@@ -3,14 +3,15 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "forwardPorts": [6080, 5900],
+  "forwardPorts": [5900, 6080],
   "portsAttributes": {
-    "6080": {
-      "label": "noVNC Browser",
-      "onAutoForward": "openBrowser"
-    },
     "5900": {
-      "label": "VNC Desktop"
+      "label": "VNC Desktop",
+      "onAutoForward": "notify"
+    },
+    "6080": {
+      "label": "noVNC Browser (fallback)",
+      "onAutoForward": "silent"
     }
   },
   "customizations": {
