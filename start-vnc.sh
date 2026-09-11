@@ -29,7 +29,13 @@ nohup x11vnc -display :99 -noxdamage -forever -shared -rfbauth "$VNC_DIR/passwd"
 X11vnc_pid=$!
 echo "x11vnc PID: $X11vnc_pid"
 
-nohup websockify --web /usr/share/novnc 6080 localhost:5900 >"$VNC_DIR/novnc.log" 2>&1 &
+openssl req -x509 -nodes -newkey rsa:2048 \
+  -keyout "$VNC_DIR/novnc.key" \
+  -out "$VNC_DIR/novnc.crt" \
+  -days 365 \
+  -subj "/CN=localhost" >/dev/null 2>&1 || true
+
+nohup websockify --web /usr/share/novnc --ssl-only --cert "$VNC_DIR/novnc.crt" --key "$VNC_DIR/novnc.key" 6080 localhost:5900 >"$VNC_DIR/novnc.log" 2>&1 &
 Novnc_pid=$!
 echo "noVNC PID: $Novnc_pid"
 
@@ -37,7 +43,7 @@ echo ""
 echo "VNC is running."
 echo "  Password: $VNC_PASS"
 echo "  Direct VNC: localhost:5900"
-echo "  Browser: http://localhost:6080/vnc.html"
+echo "  Browser: https://<codespace-port-forward-url>:6080/vnc.html"
 
 # Keep the script alive so the VNC session stays attached to the Codespace lifecycle.
 wait
