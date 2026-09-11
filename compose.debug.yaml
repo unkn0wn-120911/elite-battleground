@@ -1,0 +1,6 @@
+services:
+  elitebattleground:
+    image: elitebattleground
+    build:
+      context: .
+      dockerfile: ./Dockerfile
